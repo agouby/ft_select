@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select.h                                        :+:      :+:    :+:   */
+/*   restore.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/23 00:45:13 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/23 00:35:45 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/23 00:39:24 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#include "ft_select.h"
 
-# include "ft_printf.h"
-# include <fcntl.h>
-# include <term.h>
-# include <termios.h>
-
-# define	STDIN		0
-# define	STDOUT		1
-# define	STDERR		2
-
-# define	TERM_VAR	"TERM"
-
-int		prepare_termios(struct termios *tmios);
-int		restore_termios(struct termios *tmios);
-
-#endif
+int		restore_termios(struct termios *tmios)
+{
+	tmios->c_lflag = (ICANON | ECHO);
+	return (tcsetattr(0, 0, tmios));	
+}
