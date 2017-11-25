@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 00:18:34 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/25 10:00:23 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/25 04:23:20 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/25 04:24:51 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		init_termios(struct termios *tmios)
+void	exit_usage(void)
 {
-	if ((tcgetattr(STDIN, tmios)) == -1)
-		return (-1);
-	tmios->c_lflag &= ~(ECHO);
-	tmios->c_lflag &= ~(ICANON);
-	return (tcsetattr(STDIN, TCSANOW, tmios));
+	ft_dprintf(STDERR, "usage: ft_select [...]\n");
+	exit(STDERR);
 }

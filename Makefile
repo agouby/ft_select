@@ -6,7 +6,7 @@
 #    By: agouby <agouby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 02:38:12 by agouby            #+#    #+#              #
-#    Updated: 2017/11/23 00:38:55 by agouby           ###   ########.fr        #
+#    Updated: 2017/11/25 10:39:13 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,14 @@ LIB_INC		= -I./libft/includes
 INC			= -I./includes
 SRCS_PATH	= ./srcs/
 
-SRCS_FILES	= ft_select.c \
+SRCS_FILES	= main.c \
 			  init.c \
-			  restore.c
+			  restore.c \
+			  infos.c \
+			  list.c \
+			  print.c \
+			  exit.c \
+			  utils.c
 
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS		= $(SRCS:.c=.o)
