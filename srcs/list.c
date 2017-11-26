@@ -6,11 +6,18 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 03:07:58 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/25 11:06:06 by agouby           ###   ########.fr       */
+/*   Updated: 2017/11/26 00:15:29 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+t_al	*get_last(t_al *lst)
+{
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
 t_al	*al_new(char *name)
 {
@@ -20,7 +27,9 @@ t_al	*al_new(char *name)
 		ft_memerr();
 	new->name = name;
 	new->name_len = ft_strlen(name);
+	new->select = 0;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -36,5 +45,19 @@ void	al_addb(t_al **old, t_al *new)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
+		new->prev = tmp;
 	}
+}
+
+size_t	al_len(t_al *list)
+{
+	size_t	n;
+
+	n = 0;
+	while (list)
+	{
+		n++;
+		list = list->next;
+	}
+	return (n);
 }

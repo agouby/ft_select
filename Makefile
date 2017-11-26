@@ -6,14 +6,14 @@
 #    By: agouby <agouby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 02:38:12 by agouby            #+#    #+#              #
-#    Updated: 2017/11/25 10:39:13 by agouby           ###   ########.fr        #
+#    Updated: 2017/11/25 23:04:59 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_select
 
 CC			= gcc
-FLA			= -Wall -Werror -Wextra
+FLA			= -g -fsanitize=address -Wall -Werror -Wextra
 
 LIB_NAME	= libft
 LIB_PATH	= -L./libft -lftprintf
@@ -29,7 +29,9 @@ SRCS_FILES	= main.c \
 			  list.c \
 			  print.c \
 			  exit.c \
-			  utils.c
+			  utils.c \
+			  inputs.c \
+			  delete.c
 
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS		= $(SRCS:.c=.o)

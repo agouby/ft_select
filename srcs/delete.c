@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   infos.c                                            :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/25 03:19:18 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/25 23:21:27 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/25 22:40:14 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/26 01:29:29 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	get_args_infos(t_args *args, char **av)
+int		delete_arg(t_args *args)
 {
-	av++;
-	while (*av)
+	t_al	*tmp;
+	t_al	*prev;
+
+	tmp = args->list;
+	prev = NULL;
+	if (!tmp->next)
+		return (-1);
+	while (tmp->next && args->sel != tmp)
 	{
-		al_addb(&args->list, al_new(*av));
-		av++;
+		prev = tmp;
+		tmp = tmp->next;
 	}
-	args->first = args->list;
-	args->longest = get_longest_arg(args->list);
+	if (prev)
+	{
+		args->sel = prev;
+		if (tmp->next)
+			tmp->next->prev = prev;
+		prev->next = tmp->next;
+	}
+	else
+	{
+		args->list = args->list->next;
+		args->list->prev = NULL;
+		args->sel = args->list;
+	}
+	return (0);
 }

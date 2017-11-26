@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   infos.c                                            :+:      :+:    :+:   */
+/*   inputs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/25 03:19:18 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/25 23:21:27 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/25 21:32:15 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/26 01:30:31 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	get_args_infos(t_args *args, char **av)
+void	motion_arrow(t_args *args, char arrow)
 {
-	av++;
-	while (*av)
-	{
-		al_addb(&args->list, al_new(*av));
-		av++;
-	}
-	args->first = args->list;
-	args->longest = get_longest_arg(args->list);
+	if (al_len(args->list) == 1)
+		return ;
+	if (arrow == ARROW_R)
+		args->sel = (!args->sel->next) ? args->first : args->sel->next;
+	else if (arrow == ARROW_L)
+		args->sel = (!args->sel->prev) ? args->last : args->sel->prev;
 }
