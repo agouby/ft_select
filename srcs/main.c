@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:45:33 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/26 02:50:30 by agouby           ###   ########.fr       */
+/*   Updated: 2017/11/27 01:04:10 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,40 @@ static int		loop(t_env	*e)
 {
 	char	buf[3];
 	char	*pr;
+	struct	winsize	ws;
 
+	if (ioctl(STDIN, TIOCGWINSZ, &ws) == -1)
+		return (EXIT_FAILURE);
+	e->bar.pos = ws.ws_row;
+	e->bar.len = ws.ws_col;
+	if (!(e->bar.buf = ft_strnew(e->bar.len)))
+		ft_memerr();
+	print_bar(e->bar);
+	e->edit = 1;
 	while (1)
 	{
-		if (ioctl(STDIN, TIOCGWINSZ, &e->ws) == -1)
+		if (ioctl(STDIN, TIOCGWINSZ, &ws) == -1)
 			return (EXIT_FAILURE);
+		e->bar.pos = ws.ws_row;
+		e->bar.len = ws.ws_col;
 		ft_bzero(buf, 3);
 		read(STDIN, buf, 3);
 		pr = tgetstr("cl", NULL);
 		tputs(pr, 0, putc);
 		if (buf[0] == 4)
 			return (0);
-		if (IS_ARROW(buf[0], buf[1]))
-			motion_arrow(&e->args, buf[2]);
-		else if (buf[0] == DELETE || buf[0] == BK_SPACE)
+		if (buf[0] >= SPACE && buf[0] <= 125)
 		{
-			if (delete_arg(&e->args) == -1)
-				return (0);
-			recalc_args(&e->args);
+			if (e->bar.buf[0] == '\0' && buf[0] == SPACE)
+				e->edit = 0;
+			else
+			{
+				e->edit = 1;
+				e->bar.buf[e->bar.i] = buf[0];
+				e->bar.i++;
+			}
 		}
-		else if (buf[0] == SPACE)
+		if (!e->edit && buf[0] == SPACE)
 		{
 			e->args.sel->select = !e->args.sel->select;
 			if (!e->args.sel->next)
@@ -48,11 +62,31 @@ static int		loop(t_env	*e)
 			else
 				e->args.sel = e->args.sel->next;
 		}
+		else if (IS_ARROW(buf[0], buf[1]))
+			motion_arrow(&e->args, buf[2]);
+		else if (IS_DELETE(buf[0]))
+		{
+			if (e->edit && e->bar.buf[0] == '\0')
+				e->edit = 0;
+			if (e->edit)
+				e->bar.buf[--e->bar.i] = '\0';
+			else
+			{
+				if (delete_arg(&e->args) == -1)
+					return (0);
+				recalc_args(&e->args);
+			}
+		}
 		else if (buf[0] == ESC)
 			return (0);
 		else if (buf[0] == ENTER)
 			return (1);
+		pr = tgetstr("cm", NULL);
+		tputs(tgoto(pr, 0, 0), 0, putc);
 		print_args(e->args.list, e->args.sel, e->args.longest);
+		pr = tgetstr("cm", NULL);
+		tputs(tgoto(pr, 0, e->bar.pos), 0, putc);
+		print_bar(e->bar);
 	}
 }
 
