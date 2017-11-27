@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:45:33 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/27 01:04:10 by agouby           ###   ########.fr       */
+/*   Updated: 2017/11/27 01:18:48 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int		loop(t_env	*e)
 	if (!(e->bar.buf = ft_strnew(e->bar.len)))
 		ft_memerr();
 	print_bar(e->bar);
-	e->edit = 1;
 	while (1)
 	{
 		if (ioctl(STDIN, TIOCGWINSZ, &ws) == -1)
@@ -43,32 +42,26 @@ static int		loop(t_env	*e)
 		tputs(pr, 0, putc);
 		if (buf[0] == 4)
 			return (0);
-		if (buf[0] >= SPACE && buf[0] <= 125)
+		if (IS_PRINTABLE(buf[0]))
 		{
-			if (e->bar.buf[0] == '\0' && buf[0] == SPACE)
-				e->edit = 0;
+			if (!e->bar.buf[0] && buf[0] == SPACE)
+				;
 			else
 			{
-				e->edit = 1;
 				e->bar.buf[e->bar.i] = buf[0];
 				e->bar.i++;
 			}
 		}
-		if (!e->edit && buf[0] == SPACE)
+		if (!e->bar.buf[0] && buf[0] == SPACE)
 		{
 			e->args.sel->select = !e->args.sel->select;
-			if (!e->args.sel->next)
-				e->args.sel = e->args.first;
-			else
-				e->args.sel = e->args.sel->next;
+			e->args.sel = e->args.sel->next ? e->args.sel->next : e->args.first;
 		}
 		else if (IS_ARROW(buf[0], buf[1]))
 			motion_arrow(&e->args, buf[2]);
 		else if (IS_DELETE(buf[0]))
 		{
-			if (e->edit && e->bar.buf[0] == '\0')
-				e->edit = 0;
-			if (e->edit)
+			if (e->bar.buf[0] != '\0')
 				e->bar.buf[--e->bar.i] = '\0';
 			else
 			{

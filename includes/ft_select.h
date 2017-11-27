@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/27 00:39:51 by agouby           ###   ########.fr       */
+/*   Updated: 2017/11/27 01:18:20 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,33 @@
 # include <termios.h>
 # include <sys/ioctl.h>
 
-# define STDIN			0
-# define STDOUT			1
-# define STDERR			2
+# define STDIN				0
+# define STDOUT				1
+# define STDERR				2
 
-# define TERM_VAR		"TERM"
+# define TERM_VAR			"TERM"
 
-# define IS_ARROW(X, Y) (X == 27 && Y == 91)
-# define IS_DELETE(X) (X == DELETE || X == BK_SPACE)
+# define IS_ARROW(X, Y) 	(X == 27 && Y == 91)
+# define IS_DELETE(X)		(X == DELETE || X == BK_SPACE)
+# define IS_PRINTABLE(X)	(X >= SPACE && X <= 125)
 
-# define ARROW_R		67
-# define ARROW_L		68
-# define ARROW_U		65
-# define ARROW_D		66
-# define DELETE			126
-# define BK_SPACE		127
-# define SPACE			32
-# define ENTER			10
-# define ESC			27
+# define ARROW_R			67
+# define ARROW_L			68
+# define ARROW_U			65
+# define ARROW_D			66
+# define DELETE				126
+# define BK_SPACE			127
+# define SPACE				32
+# define ENTER				10
+# define ESC				27
 
-# define CURSOR_CLR		"\e[101m"
-# define SELECT_CLR		"\e[42m"
-# define CLEAR_CLR		"\e[40m"
-# define COMBI_CLR		"\e[105m"
-# define UNDERLINE		"\e[4m"
-# define BAR_CLR		"\e[100m"
-# define LEN_CLR		6
+# define CURSOR_CLR			"\e[101m"
+# define SELECT_CLR			"\e[42m"
+# define CLEAR_CLR			"\e[40m"
+# define COMBI_CLR			"\e[105m"
+# define UNDERLINE			"\e[4m"
+# define BAR_CLR			"\e[100m"
+# define LEN_CLR			6
 
 typedef struct	s_al
 {
@@ -76,7 +77,6 @@ typedef struct	s_env
 {
 	t_args			args;
 	t_bar			bar;
-	int				edit;
 }				t_env;
 
 int				init_termios(struct termios *tmios);
