@@ -6,14 +6,14 @@
 #    By: agouby <agouby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 02:38:12 by agouby            #+#    #+#              #
-#    Updated: 2017/11/25 23:04:59 by agouby           ###   ########.fr        #
+#    Updated: 2017/11/29 07:39:02 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_select
 
 CC			= gcc
-FLA			= -g -fsanitize=address -Wall -Werror -Wextra
+FLA			= -Wall -Werror -Wextra
 
 LIB_NAME	= libft
 LIB_PATH	= -L./libft -lftprintf
@@ -31,6 +31,7 @@ SRCS_FILES	= main.c \
 			  exit.c \
 			  utils.c \
 			  inputs.c \
+			  find.c \
 			  delete.c
 
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_FILES))
@@ -40,10 +41,10 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@/usr/bin/make -C $(LIB_NAME)
-	@$(CC) $(FLA) -o $(NAME) $(OBJS) $(LIB_PATH) -l termcap
+	@$(CC) -o $(NAME) $(OBJS) $(LIB_PATH) -l termcap
 
 %.o: %.c
-	@$(CC) $(FLA) $(INC) $(LIB_INC) -c $< -o $@
+	@$(CC) $(INC) $(LIB_INC) -c $< -o $@
 
 clean:
 	@/usr/bin/make clean -C $(LIB_NAME)

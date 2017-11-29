@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/27 01:18:20 by agouby           ###   ########.fr       */
+/*   Updated: 2017/11/29 11:11:55 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			exit_usage(void);
 
 int				get_longest_arg(t_al *list);
 
-int				putc(int c);
+int				putchar(int c);
 
 void			motion_arrow(t_args *args, char arrow);
 
@@ -107,5 +107,11 @@ size_t			al_len(t_al *list);
 void			print_selected(t_al *list);
 
 void			print_bar(t_bar bar);
+
+t_al			*search(t_al *list, t_bar bar);
+
+void			get_and_put(char *cmd);
+
+int				init_window(struct termios *tmios);
 
 #endif

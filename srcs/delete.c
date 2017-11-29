@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/25 22:40:14 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/26 01:29:29 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/29 11:09:33 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/29 11:12:48 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ int		delete_arg(t_args *args)
 	prev = NULL;
 	if (!tmp->next)
 		return (-1);
-	while (tmp->next && args->sel != tmp)
-	{
-		prev = tmp;
+	while (tmp->next && args->sel != tmp && (prev = tmp))
 		tmp = tmp->next;
-	}
 	if (prev)
 	{
 		args->sel = prev;

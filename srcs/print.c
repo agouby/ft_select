@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/25 03:02:46 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/27 00:37:00 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/29 11:11:03 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/29 11:11:04 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_selected(t_al *list)
 {
 	while (list && !list->select)
-	   	list = list->next;
+		list = list->next;
 	if (list)
 		ft_printf("%s", list->name);
 	else
@@ -61,7 +61,7 @@ void	print_bar(t_bar bar)
 	char	*pr;
 
 	pr = tgetstr("cm", NULL);
-	tputs(tgoto(pr, 0, bar.pos), 0, putc);
+	tputs(tgoto(pr, 0, bar.pos), 0, putchar);
 	write(STDOUT, BAR_CLR, LEN_CLR);
 	write(STDOUT, bar.buf, bar.i);
 	write_spaces(bar.len - bar.i);

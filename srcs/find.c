@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/29 11:11:29 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/29 11:11:31 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/29 11:09:53 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/29 11:12:32 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		get_longest_arg(t_al *list)
+t_al	*search(t_al *list, t_bar bar)
 {
-	int		big;
-	int		len;
+	int	len;
 
-	big = 0;
+	len = ft_strlen(bar.buf);
 	while (list)
 	{
-		if (big < list->name_len)
-			big = list->name_len;
+		if (!ft_strncmp(list->name, bar.buf, len))
+			return (list);
 		list = list->next;
 	}
-	return (big);
-}
-
-void	get_and_put(char *cmd)
-{
-	char	*s;
-
-	s = tgetstr(cmd, NULL);
-	tputs(s, 0, &putchar);
+	return (NULL);
 }

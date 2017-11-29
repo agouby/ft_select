@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 00:35:45 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/25 23:34:48 by agouby           ###   ########.fr       */
+/*   Created: 2017/11/29 11:11:12 by agouby            #+#    #+#             */
+/*   Updated: 2017/11/29 11:11:13 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		restore_termios(struct termios *tmios)
 {
 	tmios->c_lflag = (ICANON | ECHO);
-	return (tcsetattr(STDIN, TCSANOW, tmios));	
+	return (tcsetattr(STDIN, TCSANOW, tmios));
 }
 
 void	recalc_args(t_args *args)
