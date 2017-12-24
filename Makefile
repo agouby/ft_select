@@ -15,7 +15,7 @@ COMPIL_LIB	= n
 NAME		= ft_select
 
 CC			= gcc
-FLA			= -Wno-empty-body -Wno-unused -Wall -Werror -Wextra
+FLA			= -Wall -Werror -Wextra
 
 LIB_NAME	= libft
 LIB_PATH	= -L./libft -lftprintf

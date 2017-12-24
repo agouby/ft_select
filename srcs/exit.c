@@ -21,9 +21,12 @@ void	exit_usage(void)
 void	exit_end(int signal)
 {
 	struct termios	*tmios;
+	t_env		*e;
 
 	tmios = fetch_tmios(NULL);
+	e = fetch_env(NULL);
 	get_and_put("ve");
 	restore_termios(tmios);
+	ft_strdel(&e->bar.buf);
 	exit(signal);
 }

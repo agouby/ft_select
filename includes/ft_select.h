@@ -69,9 +69,9 @@ typedef struct	s_args
 
 typedef	struct	s_bar
 {
-	int		pos;
-	int		len;
-	int		i;
+	size_t		pos;
+	size_t		len;
+	size_t		i;
 	char	*buf;
 }				t_bar;
 

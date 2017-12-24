@@ -52,6 +52,8 @@ void	print_index(t_al *list, t_al *sel, int index, int longest)
 		list = list->next;
 		i++;
 	}
+	if (!list)
+		return ;
 	arg = list;
 	if (arg == sel)
 		write(STDOUT, UNDERLINE, 4);
@@ -63,31 +65,27 @@ void	print_index(t_al *list, t_al *sel, int index, int longest)
 	write(STDOUT, CLEAR_CLR, LEN_CLR);
 	write(STDOUT, "\e[0m", 4);
 	write_spaces(longest - arg->name_len + 1);
-//	if (arg->next)
-//		write(STDOUT, " ", 1);
 }
 
 void	print_args(t_args args, int nb_lines)
 {
-	int decal;
-	int i;
+	int	decal;
+	int	i;
 	int	nb_per_line;
-	int mod;
-	int j;
+	int	j;
 
-//	print_index(args.list, args.sel, 1, args.longest);
 	decal = 0;
 	i = 0;
 	if (!nb_lines)
 	{
-	//	get_and_put("cl");
+		write(STDOUT, "T\nO\nO\n\nS\nM\nA\nL\nL\n", 17);
 		return ;
 	}
-	mod = args.nb_args % nb_lines;
+	if (args.nb_args % 2)
+		args.nb_args++;
 	nb_per_line = args.nb_args / nb_lines;
 	int lol;
 
-//	ft_printf("%d", nb_per_line);
 	lol = nb_per_line;
 	while (i < nb_lines)
 	{
@@ -95,12 +93,6 @@ void	print_args(t_args args, int nb_lines)
 		nb_per_line = lol;
 		while (nb_per_line)
 		{
-			if (j == 0 && mod)
-			{
-				++nb_per_line;
-				mod = 0;
-			}
-	//		ft_printf("J = %d\n", j);
 			print_index(args.list, args.sel, j, args.longest);
 			j += nb_lines;
 			--nb_per_line;
@@ -113,12 +105,11 @@ void	print_args(t_args args, int nb_lines)
 
 void	print_bar(t_bar bar)
 {
-	char	*pr;
-
-	pr = tgetstr("cm", NULL);
-	tputs(tgoto(pr, 0, bar.pos), 0, putchar);
+	if (ft_strlen(bar.buf) > bar.len)
+		return ;
 	write(STDOUT, BAR_CLR, LEN_CLR);
 	write(STDOUT, bar.buf, bar.i);
-	write_spaces(bar.len - bar.i);
+	if (bar.len - bar.i > 0)
+		write_spaces(bar.len - bar.i);
 	write(STDOUT, CLEAR_CLR, LEN_CLR);
 }

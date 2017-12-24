@@ -1,25 +1,21 @@
 #include "ft_select.h"
 
-int fd;
-
 int	get_nb_lines(int col, int len_args, int longest)
 {
 	int	ln;
-	int	mod;
 	int	full_len;
-	int l;
+	int	l;
 
 	ln = 1;
-	mod = len_args % 2;
+	if (len_args % 2)
+		len_args++;
 	full_len = len_args * longest + len_args;
-	if (mod)
-		full_len += longest + 1;
 	l = full_len;
 	while (col <= l && ++ln)
 		l = full_len / ln;
 	if (l < longest)
 		return (0);
-	if (ln > len_args / 2 && !mod)
+	if (ln > len_args / 2)
 		return (len_args);
 	return (ln);
 }
@@ -31,18 +27,23 @@ void	resize(int signal)
 	int		nb_lines;
 
 	(void)signal;
+	tputs(tgoto(tgetstr("cm", NULL), 0, 0), 0, putchar);
 	if (ioctl(STDIN, TIOCGWINSZ, &w) == -1)
 		exit(1);
 	e = fetch_env(NULL);
+	e->bar.pos = w.ws_row;
+	e->bar.len = w.ws_col;
 	e->args.nb_args = al_len(e->args.list);
 	get_and_put("cl");
 	nb_lines = get_nb_lines(w.ws_col, e->args.nb_args, e->args.longest);
 	print_args(e->args, nb_lines);
+	tputs(tgoto(tgetstr("cm", NULL), 0, e->bar.pos), 0, putchar);
+//	if (e->bar.len < w.ws_col)
+		print_bar(e->bar);
 }
 
 void	init_signals(void)
 {
-	fd = open("lol", O_RDWR);
 	signal(SIGINT, &exit_end);
 	signal(SIGSEGV, &exit_end);
 	signal(SIGWINCH, &resize);

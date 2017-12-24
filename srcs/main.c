@@ -38,23 +38,11 @@ int		putchar(int c)
 static int		loop(t_env	*e)
 {
 	char	*pr;
-	struct	winsize	ws;
 	t_read	r;
 	t_al	*srch;
 
-	if (ioctl(STDIN, TIOCGWINSZ, &ws) == -1)
-		return (EXIT_FAILURE);
-	e->bar.pos = ws.ws_row;
-	e->bar.len = ws.ws_col;
-	if (!(e->bar.buf = ft_strnew(e->bar.len)))
-		ft_memerr();
-	print_bar(e->bar);
 	while (1)
 	{
-		if (ioctl(STDIN, TIOCGWINSZ, &ws) == -1)
-			return (EXIT_FAILURE);
-		e->bar.pos = ws.ws_row;
-		e->bar.len = ws.ws_col;
 		ft_bzero(r.buf, 3);
 		fetch_env(e);
 		read(STDIN, r.buf, 3);
@@ -109,7 +97,6 @@ static int		loop(t_env	*e)
 		resize(0);
 		pr = tgetstr("cm", NULL);
 		tputs(tgoto(pr, 0, e->bar.pos), 0, putchar);
-//		print_bar(e->bar);
 	}
 }
 
@@ -126,6 +113,9 @@ int		main(int ac, char **av)
 	get_args_infos(&e.args, av);
 	e.args.sel = e.args.list;
 	e.args.last = get_last(e.args.list);
+	e.bar.len = 15;
+	if (!(e.bar.buf = ft_strnew(1024)))
+		ft_memerr();
 	fetch_env(&e);
 	resize(0);
 	int ret = loop(&e);
