@@ -14,11 +14,13 @@
 
 void	get_args_infos(t_args *args, char **av)
 {
-	av++;
+	args->nb_args = 0;
+	++av;
 	while (*av)
 	{
 		al_addb(&args->list, al_new(*av));
-		av++;
+		++args->nb_args;
+		++av;
 	}
 	args->first = args->list;
 	args->longest = get_longest_arg(args->list);

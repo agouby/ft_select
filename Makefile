@@ -10,10 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
+COMPIL_LIB	= n
+
 NAME		= ft_select
 
 CC			= gcc
-FLA			= -Wall -Werror -Wextra
+FLA			= -Wno-empty-body -Wno-unused -Wall -Werror -Wextra
 
 LIB_NAME	= libft
 LIB_PATH	= -L./libft -lftprintf
@@ -32,7 +34,8 @@ SRCS_FILES	= main.c \
 			  utils.c \
 			  inputs.c \
 			  find.c \
-			  delete.c
+			  delete.c \
+			  signal.c
 
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS		= $(SRCS:.c=.o)
@@ -40,18 +43,24 @@ OBJS		= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
+ifeq ($(COMPIL_LIB), y)
 	@/usr/bin/make -C $(LIB_NAME)
-	@$(CC) -o $(NAME) $(OBJS) $(LIB_PATH) -l termcap
+endif
+	@$(CC) $(FLA) -o $(NAME) $(OBJS) $(LIB_PATH) -l termcap
 
 %.o: %.c
-	@$(CC) $(INC) $(LIB_INC) -c $< -o $@
+	@$(CC) $(FLA) $(INC) $(LIB_INC) -c $< -o $@
 
 clean:
+ifeq ($(COMPIL_LIB), y)
 	@/usr/bin/make clean -C $(LIB_NAME)
+endif
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
+ifeq ($(COMPIL_LIB), y)
 	@/usr/bin/make fclean -C $(LIB_NAME)
+endif
 	@/bin/rm -f $(NAME)
 
 re: fclean all

@@ -23,8 +23,10 @@ int		init_termios(struct termios *tmios)
 
 int		init_window(struct termios *tmios)
 {
+	tgetent(NULL, getenv(TERM_VAR));
 	if ((init_termios(tmios)) == -1)
 		exit(EXIT_FAILURE);
+	fetch_tmios(tmios);
 	get_and_put("cl");
 	get_and_put("vi");
 	return (0);

@@ -15,7 +15,6 @@
 int		get_longest_arg(t_al *list)
 {
 	int		big;
-	int		len;
 
 	big = 0;
 	while (list)

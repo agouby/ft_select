@@ -29,30 +29,80 @@ void	print_selected(t_al *list)
 
 void	write_spaces(int n)
 {
-	while (n)
-	{
-		write(STDOUT, " ", 1);
-		n--;
-	}
+	char	str[n];
+
+	ft_memset(str, ' ', n);
+	write(STDOUT, str, n);
 }
 
-void	print_args(t_al *args, t_al *sel, int longest)
+void	print_tab(char **tabe)
 {
-	while (args)
+	while (*tabe)
+		ft_printf("%s\n", *tabe++);
+}
+
+void	print_index(t_al *list, t_al *sel, int index, int longest)
+{
+	int i;
+	t_al	*arg;
+
+	i = 0;
+	while (list && index != i)
 	{
-		if (args == sel)
-			write(STDOUT, UNDERLINE, 4);
-		if (args->select)
-			write(STDOUT, SELECT_CLR, LEN_CLR);
-		if (args == sel && args->select)
-			write(STDOUT, COMBI_CLR, LEN_CLR);
-		write(STDOUT, args->name, args->name_len);
-		write(STDOUT, CLEAR_CLR, LEN_CLR);
-		write(STDOUT, "\e[0m", 4);
-		write_spaces(longest - args->name_len);
-		if (args->next)
-			write(STDOUT, " ", 1);
-		args = args->next;
+		list = list->next;
+		i++;
+	}
+	arg = list;
+	if (arg == sel)
+		write(STDOUT, UNDERLINE, 4);
+	if (arg->select)
+		write(STDOUT, SELECT_CLR, LEN_CLR);
+	if (arg == sel && arg->select)
+		write(STDOUT, COMBI_CLR, LEN_CLR);
+	write(STDOUT, arg->name, arg->name_len);
+	write(STDOUT, CLEAR_CLR, LEN_CLR);
+	write(STDOUT, "\e[0m", 4);
+	write_spaces(longest - arg->name_len + 1);
+//	if (arg->next)
+//		write(STDOUT, " ", 1);
+}
+
+void	print_args(t_args args, int nb_lines)
+{
+	int decal;
+	int i;
+	int	nb_per_line;
+	int mod;
+	int j;
+
+//	print_index(args.list, args.sel, 1, args.longest);
+	decal = 0;
+	i = 0;
+	mod = args.nb_args % nb_lines;
+	nb_per_line = args.nb_args / nb_lines;
+	int lol;
+
+	lol = nb_per_line;
+	while (i < nb_lines)
+	{
+//		ft_printf("%d\n", nb_per_line);
+		j = decal;
+		nb_per_line = lol;
+		while (nb_per_line)
+		{
+			if (j == 0 && mod)
+			{
+				++nb_per_line;
+				mod = 0;
+			}
+	//		ft_printf("J = %d\n", j);
+			print_index(args.list, args.sel, j, args.longest);
+			j += nb_lines;
+			--nb_per_line;
+		}
+		ft_printf("\n");
+		++i;
+		++decal;
 	}
 }
 

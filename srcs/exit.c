@@ -17,3 +17,13 @@ void	exit_usage(void)
 	ft_dprintf(STDERR, "usage: ft_select [...]\n");
 	exit(STDERR);
 }
+
+void	exit_end(int signal)
+{
+	struct termios	*tmios;
+
+	tmios = fetch_tmios(NULL);
+	get_and_put("ve");
+	restore_termios(tmios);
+	exit(signal);
+}

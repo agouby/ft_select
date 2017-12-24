@@ -12,7 +12,7 @@
 
 #include "ft_select.h"
 
-void	motion_arrow(t_args *args, char arrow)
+void	motion_arrow(t_args *args, int arrow)
 {
 	if (al_len(args->list) == 1)
 		return ;
