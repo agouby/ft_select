@@ -78,14 +78,19 @@ void	print_args(t_args args, int nb_lines)
 //	print_index(args.list, args.sel, 1, args.longest);
 	decal = 0;
 	i = 0;
+	if (!nb_lines)
+	{
+	//	get_and_put("cl");
+		return ;
+	}
 	mod = args.nb_args % nb_lines;
 	nb_per_line = args.nb_args / nb_lines;
 	int lol;
 
+//	ft_printf("%d", nb_per_line);
 	lol = nb_per_line;
 	while (i < nb_lines)
 	{
-//		ft_printf("%d\n", nb_per_line);
 		j = decal;
 		nb_per_line = lol;
 		while (nb_per_line)
