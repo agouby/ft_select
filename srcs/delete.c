@@ -20,7 +20,10 @@ int		delete_arg(t_args *args)
 	tmp = args->list;
 	prev = NULL;
 	if (!tmp->next)
+	{
+		free(tmp);
 		return (-1);
+	}
 	while (tmp->next && args->sel != tmp && (prev = tmp))
 		tmp = tmp->next;
 	if (prev)
@@ -36,5 +39,6 @@ int		delete_arg(t_args *args)
 		args->list->prev = NULL;
 		args->sel = args->list;
 	}
+	free(tmp);
 	return (0);
 }
