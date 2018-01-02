@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:11:03 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/29 11:11:04 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/02 19:12:57 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_tab(char **tabe)
 
 void	print_index(t_al *list, t_al *sel, int index, int longest)
 {
-	int i;
+	int		i;
 	t_al	*arg;
 
 	i = 0;
@@ -73,6 +73,7 @@ void	print_args(t_args args, int nb_lines)
 	int	i;
 	int	nb_per_line;
 	int	j;
+	int tmp;
 
 	decal = 0;
 	i = 0;
@@ -84,13 +85,11 @@ void	print_args(t_args args, int nb_lines)
 	if (args.nb_args % 2)
 		args.nb_args++;
 	nb_per_line = args.nb_args / nb_lines;
-	int lol;
-
-	lol = nb_per_line;
+	tmp = nb_per_line;
 	while (i < nb_lines)
 	{
 		j = decal;
-		nb_per_line = lol;
+		nb_per_line = tmp;
 		while (nb_per_line)
 		{
 			print_index(args.list, args.sel, j, args.longest);

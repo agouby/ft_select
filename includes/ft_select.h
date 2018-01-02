@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/29 11:11:55 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/02 19:05:45 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,63 +72,44 @@ typedef	struct	s_bar
 	size_t		pos;
 	size_t		len;
 	size_t		i;
-	char	*buf;
+	char		*buf;
 }				t_bar;
 
 typedef struct	s_read
 {
-	int	keybind;
+	int		keybind;
 	char	buf[3];
-}		t_read;
+}				t_read;
 
 typedef struct	s_env
 {
-	t_args			args;
-	t_bar			bar;
+	t_args	args;
+	t_bar	bar;
 }				t_env;
 
 int				init_termios(struct termios *tmios);
 int				restore_termios(struct termios *tmios);
-
 void			get_args_infos(t_args *args, char **av);
 void			print_args(t_args args, int nb_lines);
-
 t_al			*al_new(char *name);
 void			al_addb(t_al **old, t_al *n);
-
 void			exit_usage(void);
-
 int				get_longest_arg(t_al *list);
-
 int				putchar(int c);
-
 void			motion_arrow(t_args *args, int arrow);
-
 t_al			*get_last(t_al *list);
-
 int				delete_arg(t_args *args);
-
 void			recalc_args(t_args *args);
-
 size_t			al_len(t_al *list);
-
 void			print_selected(t_al *list);
-
 void			print_bar(t_bar bar);
-
 t_al			*search(t_al *list, t_bar bar);
-
 void			get_and_put(char *cmd);
-
 int				init_window(struct termios *tmios);
-
 void			init_signals(void);
-
 void			*fetch_tmios(void *data);
 void			*fetch_env(void *data);
-
 void			exit_end(int signal);
-
 void			resize(int signal);
 
 #endif

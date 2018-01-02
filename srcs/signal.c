@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/02 19:13:03 by agouby            #+#    #+#             */
+/*   Updated: 2018/01/02 19:13:47 by agouby           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
-int	get_nb_lines(int col, int len_args, int longest)
+int		get_nb_lines(int col, int len_args, int longest)
 {
 	int	ln;
 	int	full_len;
@@ -23,8 +35,8 @@ int	get_nb_lines(int col, int len_args, int longest)
 void	resize(int signal)
 {
 	struct winsize	w;
-	t_env		*e;
-	int		nb_lines;
+	t_env			*e;
+	int				nb_lines;
 
 	(void)signal;
 	tputs(tgoto(tgetstr("cm", NULL), 0, 0), 0, putchar);
@@ -38,8 +50,7 @@ void	resize(int signal)
 	nb_lines = get_nb_lines(w.ws_col, e->args.nb_args, e->args.longest);
 	print_args(e->args, nb_lines);
 	tputs(tgoto(tgetstr("cm", NULL), 0, e->bar.pos), 0, putchar);
-//	if (e->bar.len < w.ws_col)
-		print_bar(e->bar);
+	print_bar(e->bar);
 }
 
 void	init_signals(void)

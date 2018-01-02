@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:10:04 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/29 11:10:06 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/02 19:14:21 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exit_usage(void)
 void	exit_end(int signal)
 {
 	struct termios	*tmios;
-	t_env		*e;
+	t_env			*e;
 
 	tmios = fetch_tmios(NULL);
 	e = fetch_env(NULL);
