@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/02 19:05:45 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/03 19:46:32 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void			*fetch_tmios(void *data);
 void			*fetch_env(void *data);
 void			exit_end(int signal);
 void			resize(int signal);
+void			write_spaces(int n);
 
 #endif

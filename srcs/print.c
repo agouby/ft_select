@@ -6,13 +6,13 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:11:03 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/02 19:12:57 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/03 19:45:02 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	print_selected(t_al *list)
+void			print_selected(t_al *list)
 {
 	while (list && !list->select)
 		list = list->next;
@@ -27,21 +27,7 @@ void	print_selected(t_al *list)
 	}
 }
 
-void	write_spaces(int n)
-{
-	char	str[n];
-
-	ft_memset(str, ' ', n);
-	write(STDOUT, str, n);
-}
-
-void	print_tab(char **tabe)
-{
-	while (*tabe)
-		ft_printf("%s\n", *tabe++);
-}
-
-void	print_index(t_al *list, t_al *sel, int index, int longest)
+void			print_index(t_al *list, t_al *sel, int index, int longest)
 {
 	int		i;
 	t_al	*arg;
@@ -67,16 +53,35 @@ void	print_index(t_al *list, t_al *sel, int index, int longest)
 	write_spaces(longest - arg->name_len + 1);
 }
 
-void	print_args(t_args args, int nb_lines)
+static void		print_loop(t_args args, int nb_per_line, int nb_lines)
 {
-	int	decal;
-	int	i;
-	int	nb_per_line;
-	int	j;
-	int tmp;
+	int		i;
+	int		j;
+	int		decal;
+	int		tmp;
 
-	decal = 0;
 	i = 0;
+	decal = 0;
+	while (i < nb_lines)
+	{
+		j = decal;
+		tmp = nb_per_line;
+		while (tmp)
+		{
+			print_index(args.list, args.sel, j, args.longest);
+			j += nb_lines;
+			--tmp;
+		}
+		ft_printf("\n");
+		++i;
+		++decal;
+	}
+}
+
+void			print_args(t_args args, int nb_lines)
+{
+	int	nb_per_line;
+
 	if (!nb_lines)
 	{
 		write(STDOUT, "T\nO\nO\n\nS\nM\nA\nL\nL\n", 17);
@@ -85,24 +90,10 @@ void	print_args(t_args args, int nb_lines)
 	if (args.nb_args % 2)
 		args.nb_args++;
 	nb_per_line = args.nb_args / nb_lines;
-	tmp = nb_per_line;
-	while (i < nb_lines)
-	{
-		j = decal;
-		nb_per_line = tmp;
-		while (nb_per_line)
-		{
-			print_index(args.list, args.sel, j, args.longest);
-			j += nb_lines;
-			--nb_per_line;
-		}
-		ft_printf("\n");
-		++i;
-		++decal;
-	}
+	print_loop(args, nb_per_line, nb_lines);
 }
 
-void	print_bar(t_bar bar)
+void			print_bar(t_bar bar)
 {
 	if (ft_strlen(bar.buf) > bar.len)
 		return ;

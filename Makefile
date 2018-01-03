@@ -6,7 +6,7 @@
 #    By: agouby <agouby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 02:38:12 by agouby            #+#    #+#              #
-#    Updated: 2017/11/29 07:39:02 by agouby           ###   ########.fr        #
+#    Updated: 2018/01/03 19:47:10 by agouby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS_FILES	= main.c \
 			  inputs.c \
 			  find.c \
 			  delete.c \
-			  signal.c
+			  signal.c \
+			  fetch.c
 
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 OBJS		= $(SRCS:.c=.o)

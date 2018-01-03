@@ -6,34 +6,11 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:10:45 by agouby            #+#    #+#             */
-/*   Updated: 2017/11/29 11:10:46 by agouby           ###   ########.fr       */
+/*   Updated: 2018/01/03 19:49:15 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_select.h"
-
-void		*fetch_env(void *data)
-{
-	static void	*sgt_env = NULL;
-
-	if (data)
-		sgt_env = data;
-	return (sgt_env);
-}
-
-void		*fetch_tmios(void *data)
-{
-	static void	*sgt_tmios = NULL;
-
-	if (data)
-		sgt_tmios = data;
-	return (sgt_tmios);
-}
-
-int		putchar(int c)
-{
-	return (write(STDOUT, &c, 1));
-}
 
 static int		loop(t_env	*e)
 {
