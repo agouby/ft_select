@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:11:03 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/03 19:45:02 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:47:31 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			print_args(t_args args, int nb_lines)
 
 	if (!nb_lines)
 	{
-		write(STDOUT, "T\nO\nO\n\nS\nM\nA\nL\nL\n", 17);
+		write(STDOUT, TOO_SMALL, ft_strlen(TOO_SMALL));
 		return ;
 	}
 	nb_per_line = args.nb_args / nb_lines;

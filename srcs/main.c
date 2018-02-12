@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:10:45 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/03 19:49:15 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:59:22 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ static int		loop(t_env	*e)
 			return (0);
 		if (IS_PRINTABLE(r.keybind))
 		{
-			if (!e->bar.buf[0] && r.keybind == SPACE)
+			struct winsize w;
+			if (ioctl(STDIN, TIOCGWINSZ, &w) == -1)
+				exit(1);
+			if (e->bar.i >= w.ws_col)
+				;
+			else if (!e->bar.buf[0] && r.keybind == SPACE)
 				;
 			else
 			{

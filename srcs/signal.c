@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 19:13:03 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/02 19:13:47 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:59:24 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,7 @@ int		get_nb_lines(int col, int len_args, int longest)
 		cnt++;
 	}
 	ln = len_args / cnt + 1;
-//	ln = (len_args + 1) / ln;
-//	while (ln < len_args && ((len_args + 1) / ln) * longest >= col)
-//		ln++;
-/*	if (len_args % 2)
-		while (col - (len_args / ln + len_args % 2) * longest < 0)
-			ln++;
-	else
-		while (col - (len_args / ln + ((((len_args + 1) / ln) % ln) ? 1 : 0)) * longest < 0)
-			ln++;
-*/	return (ln);
+	return (ln);
 }
 
 void	resize(int signal)

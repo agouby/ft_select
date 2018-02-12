@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/03 19:46:32 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:46:09 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define UNDERLINE			"\e[4m"
 # define BAR_CLR			"\e[100m"
 # define LEN_CLR			6
+# define TOO_SMALL			"W\nI\nN\nD\nO\nW\n\nT\nO\nO\n\nS\nM\nA\nL\nL"
 
 typedef struct	s_al
 {

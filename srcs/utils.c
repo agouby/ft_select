@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:11:29 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/03 19:45:51 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:57:21 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int		get_longest_arg(t_al *list)
 
 void	get_and_put(char *cmd)
 {
-	char	*s;
-
-	s = tgetstr(cmd, NULL);
-	tputs(s, 0, &putchar);
+	tputs(tgetstr(cmd, NULL), 0, &putchar);
 }
 
 void	write_spaces(int n)
