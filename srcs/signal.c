@@ -16,20 +16,34 @@ int		get_nb_lines(int col, int len_args, int longest)
 {
 	int	ln;
 	int	full_len;
-	int	l;
 
-	ln = 1;
-	if (len_args % 2)
-		len_args++;
-	full_len = len_args * longest + len_args;
-	l = full_len;
-	while (col <= l && ++ln)
-		l = full_len / ln;
-	if (l < longest)
+	if (col < ++longest)
 		return (0);
-	if (ln > len_args / 2)
-		return (len_args);
-	return (ln);
+	full_len = len_args * longest;
+	if (full_len < longest)
+		return (0);
+	if (full_len <= col)
+		return (1);
+	ln = longest;
+	int cnt = 0;
+	while (1)
+	{
+		if (ln > col)
+			break;
+		ln += longest;
+		cnt++;
+	}
+	ln = len_args / cnt + 1;
+//	ln = (len_args + 1) / ln;
+//	while (ln < len_args && ((len_args + 1) / ln) * longest >= col)
+//		ln++;
+/*	if (len_args % 2)
+		while (col - (len_args / ln + len_args % 2) * longest < 0)
+			ln++;
+	else
+		while (col - (len_args / ln + ((((len_args + 1) / ln) % ln) ? 1 : 0)) * longest < 0)
+			ln++;
+*/	return (ln);
 }
 
 void	resize(int signal)

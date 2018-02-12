@@ -87,9 +87,10 @@ void			print_args(t_args args, int nb_lines)
 		write(STDOUT, "T\nO\nO\n\nS\nM\nA\nL\nL\n", 17);
 		return ;
 	}
-	nb_per_line = args.nb_args / nb_lines;
-	if (args.nb_args % nb_lines)
-		++nb_per_line;
+	if (args.nb_args % 2)
+		args.nb_args++;
+	nb_per_line = args.nb_args / nb_lines + 1;
+	ft_printf("%d\n", nb_per_line);
 	print_loop(args, nb_per_line, nb_lines);
 }
 
