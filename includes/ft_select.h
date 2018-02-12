@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 02:44:53 by agouby            #+#    #+#             */
-/*   Updated: 2018/02/12 12:46:09 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:02:50 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct	s_env
 }				t_env;
 
 int				init_termios(struct termios *tmios);
-int				restore_termios(struct termios *tmios);
+int				restore_termios(void);
 void			get_args_infos(t_args *args, char **av);
 void			print_args(t_args args, int nb_lines);
 t_al			*al_new(char *name);
@@ -113,5 +113,9 @@ void			*fetch_env(void *data);
 void			exit_end(int signal);
 void			resize(int signal);
 void			write_spaces(int n);
+void			*old_tmios(void *tmios);
+void			key_is_printable(t_env *e, t_read r);
+void			key_is_space(t_env *e);
+int				key_is_delete(t_env *e);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 19:46:08 by agouby            #+#    #+#             */
-/*   Updated: 2018/01/03 19:46:36 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 14:24:45 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ void		*fetch_tmios(void *data)
 	if (data)
 		sgt_tmios = data;
 	return (sgt_tmios);
+}
+
+void		*old_tmios(void *data)
+{
+	static void	*old_data = NULL;
+
+	if (data)
+		old_data = data;
+	return (old_data);
 }

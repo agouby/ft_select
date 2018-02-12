@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:11:29 by agouby            #+#    #+#             */
-/*   Updated: 2018/02/12 12:57:21 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:36:04 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	write_spaces(int n)
 
 int		putchar(int c)
 {
-		return (write(STDOUT, &c, 1));
+	return (write(STDOUT, &c, 1));
 }

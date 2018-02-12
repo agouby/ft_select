@@ -6,7 +6,7 @@
 /*   By: agouby <agouby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 19:13:03 by agouby            #+#    #+#             */
-/*   Updated: 2018/02/12 12:59:24 by agouby           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:35:47 by agouby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		get_nb_lines(int col, int len_args, int longest)
 {
 	int	ln;
 	int	full_len;
+	int cnt;
 
+	cnt = 0;
 	if (col < ++longest)
 		return (0);
 	full_len = len_args * longest;
@@ -25,11 +27,10 @@ int		get_nb_lines(int col, int len_args, int longest)
 	if (full_len <= col)
 		return (1);
 	ln = longest;
-	int cnt = 0;
 	while (1)
 	{
 		if (ln > col)
-			break;
+			break ;
 		ln += longest;
 		cnt++;
 	}
